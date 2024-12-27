@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+p {
+    color: #555;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
+<body>
+    <div class="container">
+        <h2 id="formTitle">Login to Your Account</h2>
+        
+        <!-- Login Form -->
+        <div id="loginFormContainer">
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+            <p id="errorMessage" class="error-message"></p>
+            <p>Don't have an account? <a href="javascript:void(0);" id="switchToSignUp">Sign Up</a></p>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signUpFormContainer" style="display: none;">
+            <h3>Create Your Account</h3>
+            <form id="signUpForm">
+                <label for="newUsername">Username:</label>
+                <input type="text" id="newUsername" name="newUsername" placeholder="Choose a username" required>
+                
+                <label for="newEmail">Email:</label>
+                <input type="email" id="newEmail" name="newEmail" placeholder="Enter your email" required>
+                
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="Choose a password" required>
+                
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                
+                <button type="submit">Sign Up</button>
+            </form>
+            <p id="signUpErrorMessage" class="error-message"></p>
+            <p>Already have an account? <a href="javascript:void(0);" id="switchToLogin">Login</a></p>
+        </div>
+    </div>
+
+    <script src="script.js">// Handle form submission for Login
+      document.getElementById('loginForm').addEventListener('submit', function(e) {
+          e.preventDefault(); // Prevent form from submitting
+      
+          let username = document.getElementById('username').value;
+          let password = document.getElementById('password').value;
+          let errorMessage = document.getElementById('errorMessage');
+      
+          // Simple validation
+          if (username === '' || password === '') {
+              errorMessage.textContent = 'Both fields are required!';
+          } else {
+              errorMessage.textContent = '';
+              alert('Login successful!');
+              // You can redirect or process the login here
+              // For example, window.location.href = "dashboard.html";
+          }
+      });
+      
+      // Handle form submission for Sign Up
+      document.getElementById('signUpForm').addEventListener('submit', function(e) {
+          e.preventDefault(); // Prevent form from submitting
+      
+          let newUsername = document.getElementById('newUsername').value;
+          let newEmail = document.getElementById('newEmail').value;
+          let newPassword = document.getElementById('newPassword').value;
+          let confirmPassword = document.getElementById('confirmPassword').value;
+          let signUpErrorMessage = document.getElementById('signUpErrorMessage');
+      
+          // Simple validation
+          if (newUsername === '' || newEmail === '' || newPassword === '' || confirmPassword === '') {
+              signUpErrorMessage.textContent = 'All fields are required!';
+          } else if (newPassword !== confirmPassword) {
+              signUpErrorMessage.textContent = 'Passwords do not match!';
+          } else {
+              signUpErrorMessage.textContent = '';
+              alert('Sign Up successful!');
+              // Process the sign-up or redirect to another page
+              // For example, window.location.href = "welcome.html";
+          }
+      });
+      
+      // Switch to Sign Up form
+      document.getElementById('switchToSignUp').addEventListener('click', function() {
+          document.getElementById('formTitle').textContent = 'Create Your Account';
+          document.getElementById('loginFormContainer').style.display = 'none';
+          document.getElementById('signUpFormContainer').style.display = 'block';
+      });
+      
+      // Switch to Login form
+      document.getElementById('switchToLogin').addEventListener('click', function() {
+          document.getElementById('formTitle').textContent = 'Login to Your Account';
+          document.getElementById('loginFormContainer').style.display = 'block';
+          document.getElementById('signUpFormContainer').style.display = 'none';
+      });</script>
+</body>
+</html>
